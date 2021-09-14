@@ -40,9 +40,6 @@ public class ControllerStudent {
 
     @PutMapping(value = "/updateStudent")
     public Student update(@RequestBody Student student){
-        if(student.getId() != null){
-            return service.update(student);
-        }
-        throw new RuntimeException("EL id seleccionado no existe");
+        return service.update(student);
     }
 }

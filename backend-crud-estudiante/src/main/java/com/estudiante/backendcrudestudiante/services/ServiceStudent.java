@@ -40,7 +40,12 @@ public class ServiceStudent implements InterfaceServiceStudent {
 
     @Override
     public Student update(Student student) {
-        return data.findById(student.getId()).orElseThrow();
+        if(data.findById(student.getId()).isEmpty()){
+            //return data.findById(student.getId()).orElseThrow();
+            throw new RuntimeException("EL id seleccionado no existe");
+        }
+        return data.save(student);
+
     }
 
 }
