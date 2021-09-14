@@ -18,14 +18,19 @@ public class ServiceStudent implements InterfaceServiceStudent {
 
     @Override
     public ArrayList<Student> listAllStudents() {
-        return  (ArrayList<Student>) data.findAll();
+        return (ArrayList<Student>) data.findAll();
     }
 
     @Override
     public Optional<Student> listStudentById(int id) {
-        if (data.findById(id).isEmpty()){
+        if (data.findById(id).isEmpty()) {
             throw new NotSuchElementException("the user that you want to search was not found");
         }
         return data.findById(id);
     }
+
+    public Student save(Student student) {
+        return data.save(student);
+    }
+
 }
