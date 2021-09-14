@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Fragment } from 'react'
+import Add from './components/Add'
+
+const HOST_API = 'http://localhost:8080/api'
+
+const List = () => {
+
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Fragment>
+      <div className="container">
+        <h1>Aplicación agregar estudiante</h1>
+        <div className="row">
+          <div className="col-md-6">
+            <Add />
+          </div>
+          <div className="col-md-6">
+            
+          </div>
+        </div>
+      </div>
+      
+    </Fragment>
   );
 }
 

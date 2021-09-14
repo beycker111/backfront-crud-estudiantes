@@ -13,10 +13,10 @@ import java.util.NoSuchElementException;
 @ControllerAdvice(annotations = RestController.class)
 public class HandlerExceptions {
 
-    @ExceptionHandler(NoSuchElementException.class)
+    @ExceptionHandler(NotSuchElementException.class)
     public ResponseEntity<?> NotSuchElementException(Exception e){
         ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        return giveResponse(HttpStatus.NOT_FOUND, e);
+        return giveResponse(HttpStatus.BAD_REQUEST, e);
     }
 
     private ResponseEntity<HashMap> giveResponse(HttpStatus httpStatus, Exception exc) {
