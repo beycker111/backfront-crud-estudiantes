@@ -33,4 +33,11 @@ public class ServiceStudent implements InterfaceServiceStudent {
         return data.save(student);
     }
 
+    public Optional<Student> deleteStudent(int id) {
+        Optional<Student> student = data.findById(id);
+        if (!student.isPresent()){
+            throw new NotSuchElementException("The student with id " + id + " was not found");
+        }
+        return student;
+    }
 }

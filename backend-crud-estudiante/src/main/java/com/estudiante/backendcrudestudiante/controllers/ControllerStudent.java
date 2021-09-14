@@ -21,7 +21,6 @@ public class ControllerStudent {
     @Autowired
     private InterfaceServiceStudent service;
 
-
     @GetMapping(value = "listStudents")
     public Iterable<Student>listPersons(){
         return service.listAllStudents();
@@ -37,5 +36,8 @@ public class ControllerStudent {
         return service.save(student);
     }
 
-
+    @DeleteMapping(value="/deleteStudentById/{id}")
+    public void deleteStudent(@PathVariable("id") Integer id) {
+        service.deleteStudent(id);
+    }
 }
