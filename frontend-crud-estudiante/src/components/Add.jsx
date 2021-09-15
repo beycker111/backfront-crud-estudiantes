@@ -5,64 +5,80 @@ import { useForm } from "react-hook-form";
 
 export default function Formularios() {
 
-  const [persona, setPersona] = useState([]);
+  const [student, setStudent] = useState([]);
 
 
   const { register, handleSubmit, formState: { errors } } = useForm();
+
   const onSubmit = (data, e) => {
     e.preventDefault();
-    setPersona((persona) => [...persona, data]);
+    setStudent((student) => [...student, data]);
     console.log(data);
     e.target.reset()
   };
 
   return (
     <>
-      <h2>Formulario</h2>
+      <h2>Agregar Estudiante</h2>
       <Fragment>
         <form onSubmit={handleSubmit(onSubmit)}>
           <label>Nombre</label>
           <input
             type="text"
             className="form-control my-2"
-            {...register("nombre", { required: true, pattern: /^[A-Za-z]+$/i })}
+            {...register("nombre", { required: true, pattern: /^[a-zA-ZÀ-ÿ\s]{1,40}$/ })}
           />
-          {errors.nombre?.type === 'required' && <span className="text-danger text-small d-block mb-2">Nombre es requerido</span>}
-          {errors.nombre?.type === 'pattern' && <span className="text-danger text-small d-block mb-2">Nombre no acepta numeros</span>}
+          {errors.nombre?.type === 'required' && <span className="text-danger text-small d-block mb-2">Campo nombre es requerido</span>}
+          {errors.nombre?.type === 'pattern' && <span className="text-danger text-small d-block mb-2">El campo no puede contener numeros ni caracteres especiales</span>}
 
           
           <label>Apellido</label>
           <input type="text"
             className="form-control my-2"
-            {...register("text", { required: true, min: 0 })}
+            {...register("text", { required: true, min: 0 })}/>
 
-          />
-          {errors.edad?.type === 'required' && <span className="text-danger text-small d-block mb-2">Fecha de nacimiento requerido</span>}
+          {errors.edad?.type === 'required' && <span className="text-danger text-small d-block mb-2">Campo fecha de nacimiento requerido</span>}
         
           <label>Edad</label>
           <input type="date"
             className="form-control my-2"
-            {...register("email", { required: true, min: 0 })}
+            {...register("age", { required: true })}
 
           />
-          {errors.edad?.type === 'required' && <span className="text-danger text-small d-block mb-2">Email requerido</span>}
+          {errors.age?.type === 'required' && <span className="text-danger text-small d-block mb-2">Campo Email requerido</span>}
+          
+          <label>Email</label>
+          <input
+            type="text"
+            className="form-control my-2"
+            {...register("email", { required: true, pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/ })}
+          />
+          {errors.email?.type === 'required' && <span className="text-danger text-small d-block mb-2">Email es requerido</span>}
+          {errors.email?.type === 'pattern' && <span className="text-danger text-small d-block mb-2">Debe ingresar '@'</span>}
 
-      
+          <label>Telefono</label>
+          <input
+            type="text"
+            className="form-control my-2"
+            {...register("telefono", { required: true, pattern: /^[A-Za-z]+$/i })}
+          />
+          {errors.telefono?.type === 'required' && <span className="text-danger text-small d-block mb-2">Telefono es requerido</span>}
+          
 
-          <label>Ocupacion</label>
+          <label>Grado</label>
           <select {...register("ocupacion")}
             className="form-select my-2">
-            <option value="estudiante">estudiante</option>
-            <option value="empleado">empleado</option>
-            <option value="jubilado">jubilado</option>
+            <option value="Jardin">Jardin</option>
+            <option value="Primaria">Primaria</option>
+            <option value="Bachillerato">Bachillerato</option>
           </select>
 
           <button
             className="btn btn-primary my-2">
-            Guardar Persona</button>
+            Guardar</button>
         </form>
       </Fragment>
-      <Table data={persona} />
+      <Table data={student} />
     </>
 
   );
@@ -70,69 +86,5 @@ export default function Formularios() {
 
 
 
-// import React, { Fragment } from "react";
-// import { useForm } from "react-hook-form";
 
-// const Add = (props) => {
-//   const { register, errors, handleSubmit } = useForm();
-
-//   const onSubmit = (data, e) => {
-
-//     //e.target.reset();
-//     console.log(data);
-
-//     props.addUser(data);
-//   }
-
-//   return (
-//     <Fragment>
-//       <form onSubmit={handleSubmit(onSubmit)}>
-        
-//       <label>Nombre</label>
-//         <input
-//           placeholder="Ingrese los nombres"
-//           type="text" 
-//           {...register("name")}         
-//           required
-//         />
-
-//         <label>Apellido</label>
-//         <input
-//           placeholder="Ingrese apellidos"    
-//           type="text"
-//           {...register("lastname")}          
-//           required
-//         />
-//         <label>Ingresar fecha de nacimiento</label>
-//         <input type="date"name="trip-start" />
-//         <label>Ingresar email</label>
-//         <input
-//           placeholder="Ingrese el email"
-//           type="text" 
-//           {...register("email")}         
-//           required
-//         />
-//         <label>Ingresar telefono</label>
-//         <input
-//           placeholder="Ingrese el telefono"
-//           type="text" 
-//           {...register("phone")}         
-//           required
-//         />
-//         <label>Ingresar grado</label>
-//         <input
-//           placeholder="Ingresar el grado"
-//           type="text" 
-//           {...register("grade")}         
-//           required
-//         />
-
-//         <button variant="contained" color="primary">
-//           Envia
-//         </button>
-//       </form>
-//     </Fragment>
-//   );
-// };
-
-// export default Add;
+//export default Add;
