@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react'
-import Add from './components/Add'
+import Formularios from './components/Add'
+import Table from './components/Table'
 
 const HOST_API = 'http://localhost:8080/api'
 
@@ -14,10 +15,10 @@ function App() {
         <h1>Aplicación agregar estudiante</h1>
         <div className="row">
           <div className="col-md-6">
-            <Add />
+            <Formularios />
           </div>
           <div className="col-md-6">
-            
+            {/*<Table />*/}
           </div>
         </div>
       </div>
