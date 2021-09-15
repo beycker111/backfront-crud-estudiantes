@@ -5,14 +5,16 @@ import { useForm } from "react-hook-form";
 
 export default function Formularios() {
 
-  const [persona, setPersona] = useState([]);
+  const [student, setStudent] = useState({
+    
+  });
 
 
   const { register, handleSubmit, formState: { errors } } = useForm();
   const onSubmit = (data, e) => {
     e.preventDefault();
-    setPersona((persona) => [...persona, data]);
-    console.log(data);
+    setStudent((student) => [...student, data]);
+    console.log(student);
     e.target.reset()
   };
 
@@ -62,7 +64,7 @@ export default function Formularios() {
             Guardar Persona</button>
         </form>
       </Fragment>
-      <Table data={persona} />
+      <Table data={student} />
     </>
 
   );
