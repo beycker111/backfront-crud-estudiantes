@@ -14,11 +14,8 @@ function App() {
       <div className="container">
         <h1>Aplicación agregar estudiante</h1>
         <div className="row">
-          <div className="col-md-6">
+          <div className="col-md-12">
             <Formularios />
-          </div>
-          <div className="col-md-6">
-            {/*<Table />*/}
           </div>
         </div>
       </div>

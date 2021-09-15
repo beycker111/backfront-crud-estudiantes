@@ -2,9 +2,9 @@ import React, {useState, useEffect, createContext, useRef, useContext} from "rea
 import axios from "axios";
 
 
-const Table = () => {
+const Table = (props) => {
 
-    
+   
    const[students, setStudents] = useState([]);
 
    //  window.addEventListener("load", async function(event) {
@@ -16,12 +16,31 @@ const Table = () => {
    //    console.log(data )
    //  });
    const HOST_API = 'http://localhost:8080/api'
-   useEffect(()=>{
+
+   const listAllStudents = () =>{
       axios.get(HOST_API+'/listStudents').then(res => res.data).then(data => setStudents(data));
-   },[]
+   }
+   useEffect(()=>{
+     
+      onSave(props.stud);
+      
+      listAllStudents();
+   },[students.length]
    )
-   console.log(students)
+
    
+   const onSave = (stud) =>{
+   let header = JSON.stringify(stud);
+     axios.post(HOST_API + '/saveStudent',header).then(res => res.data).then(data => [...students,...data]);
+     
+     listAllStudents();
+   }
+   const onDelete = (id) => {
+      axios.delete(HOST_API+'/deleteStudentById/' + id).then(()=>{
+         listAllStudents();
+      });
+     
+  }
    return (
       <div>
          <h3>Tabla de Personas</h3>
@@ -51,10 +70,14 @@ const Table = () => {
                         <td>{el.grade}</td>
                         <td>
                             <button className="button muted-button">Editar</button>
-                            <button className="button muted-button">Eliminar</button>
+                            <button className="btn btn-danger" onClick={() => onDelete(el.id)} >Eliminar</button>
+                           
+                        </td>
+                        <td>
+                        
                         </td>
                     </tr>
-               
+                  
                ))
             }
             </tbody>
