@@ -41,13 +41,57 @@ const Add = (props) => {
       });
   }
 
+  const onEdit = (event) => {
+    event.preventDefault();
+
+    const request = {
+      id: item.id,
+      name: state.name,
+      lastname: state.lastname,
+      birthday: state.birthday,
+      email: state.email,
+      phone: state.phone,
+      grade: state.grade
+    };
+
+    console.log(request);
+    
+    fetch(props.HOST_API + "/updateStudent", {
+      method: "PUT",
+      body: JSON.stringify(request),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => response.json())
+      .then((studentUpdate) => {
+        //dispatch({ type: "update-item", item: todo });
+
+        setState({ item: {} });
+        item.id = 0;
+        item.name = '';
+        item.lastname = '';
+        item.birthday = '';
+        item.email = '';
+        item.phone = '';
+        item.grade = '';
+        formRef.current.reset();
+        
+        //state.edit = !state.edit;
+        //
+      });
+      
+  }
+
   return (
     <Fragment>
-      <form ref={formRef} onSubmit={onAdd}>
+      <form ref={formRef}>
       <label>Nombre</label>
         <input
           placeholder="Ingrese los nombres"
-          type="text" 
+          type="text"
+          name="name"
+          defaultValue={item.name}
           onChange={(event) => {
             setState({ ...state, name: event.target.value })
           }}        
@@ -58,20 +102,24 @@ const Add = (props) => {
         <input
           placeholder="Ingrese apellidos"    
           type="text"
+          name="lastname"
+          defaultValue={item.lastname}
           onChange={(event) => {
             setState({ ...state, lastname: event.target.value })
           }}        
           required
         />
         <label>Ingresar fecha de nacimiento</label>
-        <input type="date"name="trip-start"
+        <input type="date"name="trip-start" name="birthday"
         onChange={(event) => {
           setState({ ...state, birthday: event.target.value })
         }}/>
         <label>Ingresar email</label>
         <input
           placeholder="Ingrese el email"
-          type="text" 
+          type="text"
+          name="email"
+          defaultValue={item.email}
           onChange={(event) => {
             setState({ ...state, email: event.target.value })
           }}  
@@ -80,7 +128,9 @@ const Add = (props) => {
         <label>Ingresar telefono</label>
         <input
           placeholder="Ingrese el telefono"
-          type="text" 
+          type="text"
+          name="phone"
+          defaultValue={item.phone}
           onChange={(event) => {
             setState({ ...state, phone: event.target.value })
           }}        
@@ -89,7 +139,9 @@ const Add = (props) => {
         <label>Ingresar grado</label>
         <input
           placeholder="Ingresar el grado"
-          type="text" 
+          type="text"
+          name="grade"
+          defaultValue={item.grade}
           onChange={(event) => {
             setState({ ...state, grade: event.target.value })
           }}      
@@ -97,9 +149,11 @@ const Add = (props) => {
         />
         
 
-        <button variant="contained" color="primary">
+        {/*<button variant="contained" color="primary">
           Envia
-        </button>
+        </button>*/}
+        {item.id && <button onClick={onEdit}>Actualizar</button>}
+        {!item.id && <button onClick={onAdd}>Agregar</button>}
       </form>
     </Fragment>
     

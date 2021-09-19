@@ -26,7 +26,11 @@ const Table = (props) => {
       })
     };
 
-    
+    const onEdit = (student) => {
+      //state.nameedit = todo.name;
+      //state.student = student;
+      dispatch({ type: "edit-item", item: student })
+    };
 
    return (
       <div>
@@ -54,7 +58,7 @@ const Table = (props) => {
                         <td>{element.phone}</td>
                         <td>{element.grade}</td>
                         <td>
-                            <button className="button muted-button">Editar</button>
+                            <button className="button muted-button"  onClick={() => onEdit(element)}>Editar</button>
                             <button className="btn btn-danger" onClick={() => onDelete(element.id)}>Eliminar</button>
                            
                         </td>

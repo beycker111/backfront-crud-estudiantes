@@ -1,6 +1,6 @@
 const initialState = {
     student: {
-        name: '', lastname: '', birthday: '', email: '', phone: '', grade: ''
+        id: 0, name: '', lastname: '', birthday: '', email: '', phone: '', grade: ''
     }, list: [], item: {}, edit: false, nameedit: ''
 }
 
