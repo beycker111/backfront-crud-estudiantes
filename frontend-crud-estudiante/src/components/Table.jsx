@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 
 const Table = () => {
 
-    const HOST_API = 'http://localhost:8080/api'
+    const HOST_API = 'http://localhost:8082/api'
     const[data, setData] = useState([]);
 
     useEffect(() => {
