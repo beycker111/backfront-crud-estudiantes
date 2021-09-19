@@ -18,17 +18,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("api")
+@CrossOrigin(origins = "http://localhost:3000")
 public class ControllerStudent {
 
     @Autowired
     private InterfaceServiceStudent service;
 
-    @GetMapping(value = "listStudents")
+    @GetMapping(value = "/listStudents")
     public Iterable<Student>listPersons(){
         return service.listAllStudents();
     }
 
-    @GetMapping("listStudentById/{id}")
+    @GetMapping("/listStudentById/{id}")
     public Optional<Student> listStudentById(@PathVariable("id") int id){
         return service.listStudentById(id);
     }

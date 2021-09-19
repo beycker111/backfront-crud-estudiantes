@@ -1,20 +1,31 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, createContext, useRef, useContext} from "react";
+import Store from "../store/Store"
+   
 
-const Table = () => {
+const Table = (props) => {
 
-    const HOST_API = 'http://localhost:8082/api'
-    const[data, setData] = useState([]);
+   const { dispatch, state } = useContext(Store);
+
+   const updateListStudent = () => {
+      fetch(props.HOST_API + "/listStudents")
+      .then(response => response.json())
+      .then((list) => {
+        dispatch({ type: "update-list-student", list })
+      })
+    }
 
     useEffect(() => {
-        async function getData() {
-            let studentData = await fetch(HOST_API + "/listStudents");
-            let json = await studentData.json();
-            console.log(json);
-            setData([...data,json]);
-        }
-    
-        getData()
-      }, [])
+      updateListStudent();
+    }, [state.list.lenght, dispatch]);
+
+    const onDelete = (id) => {
+      fetch(props.HOST_API + "/deleteStudentById/" + id, {
+        method: "DELETE"
+      }).then((list) => {
+         updateListStudent();
+      })
+    };
+
     
 
    return (
@@ -34,27 +45,26 @@ const Table = () => {
             </thead>
             <tbody>
                {
-                  
-                  data.length > 0 ? (
-                  data.map((el) => (
-                    <tr key={el.id}>
-                        <td>{el.name}</td>
-                        <td>{el.lastname}</td>
-                        <td>{el.birthday}</td>
-                        <td>{el.email}</td>
-                        <td>{el.phone}</td>
-                        <td>{el.grade}</td>
+                  state.list.map((element) => (
+                    <tr key={element.id}>
+                        <td>{element.name}</td>
+                        <td>{element.lastname}</td>
+                        <td>{element.birthday}</td>
+                        <td>{element.email}</td>
+                        <td>{element.phone}</td>
+                        <td>{element.grade}</td>
                         <td>
-                            <button classname="button muted-button">Editar</button>
-                            <button classname="button muted-button">Eliminar</button>
+                            <button className="button muted-button">Editar</button>
+                            <button className="btn btn-danger" onClick={() => onDelete(element.id)}>Eliminar</button>
+                           
+                        </td>
+                        <td>
+                        
                         </td>
                     </tr>
-                  ))
-               ) : (
-                  <tr>
-                     <td colSpan="4">La tabla no tiene personas ingresadas</td>
-                  </tr>
-               )}
+                  
+               ))
+               }
             </tbody>
          </table>
       </div>
