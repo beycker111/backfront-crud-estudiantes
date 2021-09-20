@@ -34,8 +34,8 @@ const Table = (props) => {
 
    return (
       <div>
-         <h3>Tabla de Personas</h3>
-         <table>
+         <h3 align="center" className="mb-4">Lista Estudiantes</h3>
+         <table class="table table-dark table-hover">
             <thead>
                <tr>
                   <th>Nombre</th>
@@ -44,7 +44,7 @@ const Table = (props) => {
                   <th>Email</th>
                   <th>Telefono</th>
                   <th>Grado</th>
-                  <th>Acciones</th>
+                  <th cl>Acciones</th>
                </tr>
             </thead>
             <tbody>

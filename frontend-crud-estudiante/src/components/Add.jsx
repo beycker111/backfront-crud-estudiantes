@@ -64,18 +64,17 @@ const Add = (props) => {
       }
     })
       .then(response => response.json())
-      .then((studentUpdate) => {
-        //dispatch({ type: "update-item", item: todo });
+      .then((item) => {
+        dispatch({ type: "update-item", item: item });
 
-        setState({ item: {} });
-        item.id = 0;
-        item.name = '';
-        item.lastname = '';
-        item.birthday = '';
-        item.email = '';
-        item.phone = '';
-        item.grade = '';
-        formRef.current.reset();
+         setState({ item: {} });
+         item.name = '';
+         item.lastname = '';
+         item.birthday = '';
+         item.email = '';
+         item.phone = '';
+         item.grade = '';
+         formRef.current.reset();
         
         //state.edit = !state.edit;
         //

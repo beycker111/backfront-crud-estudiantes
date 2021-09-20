@@ -10,7 +10,7 @@ function App() {
   return (
     <StoreProvider>
       <div class="my-4 mx-5">
-        <h2 align="center" class="mb-4">Estudiantes</h2>
+        <h2 align="center" class="mb-4">Agregar Estudiante</h2>
         <Add HOST_API={HOST_API} />
         <Table HOST_API={HOST_API} />
       </div>
