@@ -22,7 +22,8 @@ const Add = (props) => {
       phone: state.phone,
       grade: state.grade
     };
-
+    console.log(state)
+    console.log(item)
     console.log(request);
 
 
@@ -44,17 +45,24 @@ const Add = (props) => {
   const onEdit = (event) => {
     event.preventDefault();
 
+    let nameS = (state.name === '' ? item.name : state.name);
+    let lastnameS = (state.lastname === '' ? item.lastname : state.lastname);
+    let birthdayS = (state.birthday === '' ? item.birthday : state.birthday);
+    let emailS = (state.email === '' ? item.email : state.email);
+    let phoneS = (state.phone === '' ? item.phone : state.phone);
+    let gradeS = (state.grade === '' ? item.grade : state.grade);
+
     const request = {
       id: item.id,
-      name: state.name,
-      lastname: state.lastname,
-      birthday: state.birthday,
-      email: state.email,
-      phone: state.phone,
-      grade: state.grade
+      name: nameS,
+      lastname: lastnameS,
+      birthday: birthdayS,
+      email: emailS,
+      phone: phoneS,
+      grade: gradeS
     };
 
-    console.log(request);
+    console.log(state);
     
     fetch(props.HOST_API + "/updateStudent", {
       method: "PUT",
@@ -68,6 +76,7 @@ const Add = (props) => {
         dispatch({ type: "update-item", item: item });
 
          setState({ item: {} });
+         item.id = 0;
          item.name = '';
          item.lastname = '';
          item.birthday = '';
